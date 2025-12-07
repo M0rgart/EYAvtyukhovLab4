@@ -1,5 +1,5 @@
-from typing import Optional, Union, List, MutableSequence, Iterator
 import main
+from typing import Optional, Union, List, MutableSequence, Iterator
 
 
 class Player:
