@@ -1,20 +1,22 @@
-from src.power import power_function
-from src.constants import SAMPLE_CONSTANT
+import simulation
 
 
 def main() -> None:
-    """
-    Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
-    :return: Данная функция ничего не возвращает
-    """
+    print('Симуляция №1')
+    print('Вызов симуляции без указания переменных')
+    simulation.run_sim()
 
-    target, degree = map(int, input("Введите два числа разделенные пробелом: ").split(" "))
+    print('\nСимуляция №2')
+    print('Вызов симуляции из 10 шагов')
+    simulation.run_sim(steps=10)
 
-    result = power_function(target=target, power=degree)
+    print('\nСимуляция №3')
+    print('Вызов симуляции по сиду')
+    simulation.run_sim(seed=67)
 
-    print(result)
-
-    print(SAMPLE_CONSTANT)
+    print('\nСимуляция №4')
+    print('Вызов симуляции по сиду с ограниченным количеством шагов')
+    simulation.run_sim(steps=10, seed=67)
 
 if __name__ == "__main__":
     main()
