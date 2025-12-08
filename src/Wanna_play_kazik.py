@@ -147,15 +147,15 @@ class Casino:
 
         if len(self.chips) > 2:
             combination = random.choice(self.chips) + random.choice(self.chips)
-            return f'Создана фишка {chip}, объеденина с одной из предыдущих: {combination}'
+            return f'Создана фишка {chip}, объединена с одной из предыдущих: {combination}'
         return f'Создана фишка {chip}'
 
     def goose_gang(self) -> str:
-        if len(self.geese < 2):
+        if len(self.geese) < 2:
             return 'Гусей слишком мало, они не могут объедениться в стаю'
         goose1, goose2 = random.sample(list(self.geese), 2)
         flock = goose1 + goose2
-        return f'{goose1.name} и {goose2.name} объеденились в стаю: {flock}!'
+        return f'{goose1.name} и {goose2.name} объединились в стаю: {flock}!'
 
     def step(self) -> str:
         events = [
