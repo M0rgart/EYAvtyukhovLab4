@@ -53,6 +53,9 @@ class PlayerCollection(MutableSequence):
                 return player
         return None
 
+    def get_players_with_balance(self) -> List[Player]:
+        return [player for player in self._players if player.balance > 0]
+
 
 if __name__ == "__main__":
     main.main()
