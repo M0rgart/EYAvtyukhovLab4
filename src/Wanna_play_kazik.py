@@ -152,7 +152,7 @@ class Casino:
 
     def goose_gang(self) -> str:
         if len(self.geese) < 2:
-            return 'Гусей слишком мало, они не могут объедениться в стаю'
+            return 'Гусей слишком мало, они не могут объединиться в стаю'
         goose1, goose2 = random.sample(list(self.geese), 2)
         flock = goose1 + goose2
         return f'{goose1.name} и {goose2.name} объединились в стаю: {flock}!'
