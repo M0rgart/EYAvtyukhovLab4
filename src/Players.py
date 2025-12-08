@@ -1,4 +1,3 @@
-import main
 from typing import Optional, Union, List, MutableSequence, Iterator
 
 
@@ -8,7 +7,7 @@ class Player:
         self.balance = start_balance
 
     def bet(self, amount: int) -> bool:
-        if amount < self.balance:
+        if amount <= self.balance:
             self.balance -= amount
             return True
         return False
@@ -58,4 +57,4 @@ class PlayerCollection(MutableSequence):
 
 
 if __name__ == "__main__":
-    main.main()
+    pass

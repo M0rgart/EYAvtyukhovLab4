@@ -1,7 +1,6 @@
-import main, random
+import Players, We_need_one_more_goose
+import random
 from typing import MutableMapping, List, Dict, Iterator
-from src.Players import PlayerCollection, Player
-from src.We_need_one_more_goose import Goose, WarGoose, HonkGoose
 
 
 class Chip:
@@ -27,7 +26,7 @@ class CasinoBalance(MutableMapping):
         old_value = self._balances.get(key, 0)
         self._balances[key] = value
         change = value - old_value
-        log = f'Балланс {key}: {old_value} -> {value} (Изменение: {'+' if change >+ 0 else ''}{change})'
+        log = f'Баланс {key}: {old_value} -> {value} (Изменение: {'+' if change >= 0 else ''}{change})'
         self._change_log.append(log)
         print(f"[LOG] {log}")
 
@@ -52,17 +51,17 @@ class CasinoBalance(MutableMapping):
 
 class Casino:
     def __init__(self):
-        self.players = PlayerCollection()
-        self.geese = PlayerCollection()
+        self.players = Players.PlayerCollection()
+        self.geese = Players.PlayerCollection()
         self.balance = CasinoBalance()
         self.goose_income = CasinoBalance()
         self.chips: List[Chip] = []
 
-    def register_player(self, player: Player) -> None:
+    def register_player(self, player: Players.Player) -> None:
         self.players.append(player)
         self.balance[player.name] = player.balance
 
-    def register_geese(self, goose: Goose) -> None:
+    def register_geese(self, goose: We_need_one_more_goose.Goose) -> None:
         self.geese.append(goose)
         self.goose_income[goose.name] = 0
 
@@ -86,7 +85,7 @@ class Casino:
     def geese_attack(self) -> str:
         if not self.geese or not self.players:
             return 'Нет гусей или игроков. Атака не удалась.'
-        war_geese = [goose for goose in self.geese if isinstance(goose, WarGoose)]
+        war_geese = [goose for goose in self.geese if isinstance(goose, We_need_one_more_goose.WarGoose)]
         if not war_geese:
             return 'Нет военных гусей. Атака не удалась.'
 
@@ -102,7 +101,7 @@ class Casino:
         if not self.geese or not self.players:
             return 'Нет гусей или игроков. Атака не удалась.'
         goose = random.choice(self.geese)
-        if isinstance(goose, HonkGoose):
+        if isinstance(goose, We_need_one_more_goose.HonkGoose):
             return goose.super_honk(self)
         return goose.honk()
 
@@ -121,7 +120,7 @@ class Casino:
         player.balance -= steal
         self.balance[player.name] = player.balance
 
-        current_income = goose.income.get(goose.name, 0)
+        current_income = self.goose_income.get(goose.name, 0)
         self.goose_income[goose.name] = current_income + steal
 
         return f"{goose.name} украл {steal} у {player.name} (баланс {player.balance})."
@@ -132,10 +131,10 @@ class Casino:
 
         rich_players = self.players.get_players_with_balance()
         if not rich_players:
-            return 'Все игроки приняли антидеприсанты после проигрыша всех своих денег. Паники не будет :('
+            return 'Все игроки приняли антидепрессанты после проигрыша всех своих денег. Паники не будет :('
         player = random.choice(rich_players)
         lost = player.balance
-        player.balance -= lost
+        player.balance = 0
         self.balance[player.name] = 0
 
         return f'{player.name} паникует и теряет все {lost}!'
@@ -159,16 +158,16 @@ class Casino:
 
     def step(self) -> str:
         events = [
-            self.players_bet(),
-            self.geese_attack(),
-            self.goose_honk(),
-            self.goose_steal(),
-            self.player_panic(),
-            self.create_chip(),
-            self.goose_gang()
+            self.players_bet,
+            self.geese_attack,
+            self.goose_honk,
+            self.goose_steal,
+            self.player_panic,
+            self.create_chip,
+            self.goose_gang
         ]
-        weight = [0.2, 0.15, 0.15, 0.15, 0.1, 0.15, 0.1]
-        return random.choices(events, weights=weight, k=1)[0]()
+        weights = [0.2, 0.15, 0.15, 0.15, 0.1, 0.15, 0.1]
+        return random.choices(events, weights=weights, k=1)[0]()
 
 if __name__ == "__main__":
-    main.main()
+    pass

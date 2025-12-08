@@ -18,7 +18,7 @@ def main() -> None:
 
     print('\nСимуляция №3')
     print('Вызов симуляции по сиду')
-    simulation.run_sim(seed=67)
+    simulation.run_sim(seed=52)
 
     print(sep)
 

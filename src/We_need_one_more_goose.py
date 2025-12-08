@@ -1,4 +1,4 @@
-import main
+import Wanna_play_kazik, Players
 import random
 
 
@@ -22,7 +22,7 @@ class WarGoose(Goose):
         super().__init__(name, honk_volume)
         self.power = power
 
-    def attack(self, player: 'Player') -> str:
+    def attack(self, player: 'Players.Player') -> str:
         dmg = random.randint(1, self.power)
         player.balance = max(0, player.balance - dmg)
         return f'{self.name} атакует {player.name}! Баланс игрока уменьшен на {dmg}'
@@ -35,17 +35,17 @@ class HonkGoose(Goose):
         super().__init__(name, honk_volume)
         self.honk_power = honk_power
 
-    def super_honk(self, casino: 'Casino') -> str:
+    def super_honk(self, casino: 'Wanna_play_kazik.Casino') -> str:
         res = f'{self.name} издает особый крик!'
         win = 0
 
         for player in casino.players:
             if random.random() > 0.5:
                 player.balance += self.honk_power
-                casino.balances[player.name] = player.balance
+                casino.balance[player.name] = player.balance
                 win += 1
 
-        return res + f'{win} игроков получили по {self.honk_power} монет.'
+        return res + f' {win} игроков получили по {self.honk_power} монет.'
 
     def __call__(self) -> str:
         return f'Гусь {self.name} отвечает ГОГОГО с силой {self.honk_volume}!'
@@ -60,4 +60,4 @@ class GooseFlock:
         return f"GooseFlock({goose_names})"
 
 if __name__ == "__main__":
-    main.main()
+    pass
