@@ -1,4 +1,4 @@
-import Players, We_need_one_more_goose
+import src.Players, src.We_need_one_more_goose
 import random
 from typing import MutableMapping, List, Dict, Iterator
 
@@ -169,13 +169,13 @@ class Casino:
         """
         инициализация казино с коллекциями игроков и гусей, а также их балансов
         """
-        self.players = Players.PlayerCollection()
-        self.geese = Players.PlayerCollection()
+        self.players = src.Players.PlayerCollection()
+        self.geese = src.Players.PlayerCollection()
         self.balance = CasinoBalance()
         self.goose_income = CasinoBalance()
         self.chips: List[Chip] = []
 
-    def register_player(self, player: Players.Player) -> None:
+    def register_player(self, player: src.Players.Player) -> None:
         """
         Регистрирует игрока в системе казино
 
@@ -185,7 +185,7 @@ class Casino:
         self.players.append(player)
         self.balance[player.name] = player.balance
 
-    def register_geese(self, goose: We_need_one_more_goose.Goose) -> None:
+    def register_geese(self, goose: src.We_need_one_more_goose.Goose) -> None:
         """
         Регистрирует гуся в системе казино
 
@@ -227,7 +227,7 @@ class Casino:
         """
         if not self.geese or not self.players:
             return 'Нет гусей или игроков. Атака не удалась.'
-        war_geese = [goose for goose in self.geese if isinstance(goose, We_need_one_more_goose.WarGoose)]
+        war_geese = [goose for goose in self.geese if isinstance(goose, src.We_need_one_more_goose.WarGoose)]
         if not war_geese:
             return 'Нет военных гусей. Атака не удалась.'
 
@@ -249,7 +249,7 @@ class Casino:
         if not self.geese or not self.players:
             return 'Нет гусей или игроков. Атака не удалась.'
         goose = random.choice(self.geese)
-        if isinstance(goose, We_need_one_more_goose.HonkGoose):
+        if isinstance(goose, src.We_need_one_more_goose.HonkGoose):
             return goose.super_honk(self)
         return goose.honk()
 

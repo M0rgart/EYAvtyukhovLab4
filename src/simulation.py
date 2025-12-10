@@ -1,7 +1,7 @@
 import random
-from Players import *
-from Wanna_play_kazik import *
-from We_need_one_more_goose import *
+from src.Players import *
+from src.Wanna_play_kazik import *
+from src.We_need_one_more_goose import *
 
 
 def run_sim(steps: int = 20, seed: int | None = None) -> None:

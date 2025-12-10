@@ -1,4 +1,4 @@
-import Wanna_play_kazik, Players
+import src.Wanna_play_kazik, src.Players
 import random
 
 
@@ -77,7 +77,7 @@ class WarGoose(Goose):
         super().__init__(name, honk_volume)
         self.power = power
 
-    def attack(self, player: 'Players.Player') -> str:
+    def attack(self, player: 'src.Players.Player') -> str:
         """
         гусь атакует игрока, уменьшая его баланс
 
