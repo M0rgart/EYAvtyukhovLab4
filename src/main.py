@@ -29,6 +29,13 @@ def main() -> None:
     print('Вызов симуляции по сиду с ограниченным количеством шагов')
     src.simulation.run_sim(steps=10, seed=67)
 
+    print(sep)
+
+    print('\nСимуляция №5')
+    print('Вызов симуляции с данными пользователя')
+    steps = int(input('укажите количество шагов симуляции '))
+    seed = int(input('укажите сид симуляции '))
+    src.simulation.run_sim(steps=steps, seed=seed)
 
 
 if __name__ == "__main__":
